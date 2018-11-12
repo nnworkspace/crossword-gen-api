@@ -3,6 +3,6 @@
 ## Usage:
 
 ```
-gradlew. codegen
+gradlew codegen
 
 ```
