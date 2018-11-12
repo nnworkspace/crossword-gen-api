@@ -1,0 +1,95 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        dependencies {
+            classpath "org.openapitools:openapi-generator-gradle-plugin:3.3.2"
+        }
+    }
+}
+
+apply plugin: 'org.openapi.generator'
+
+group 'org.ningning.crossword_gen'
+version '0.2.0-SNAPSHOT'
+
+// sourceCompatibility = 1.8
+
+dependencies {
+}
+
+
+println '################## project path: ################'
+println  "Root project:   ${project.rootProject}"
+println  "  rootDir:      ${project.rootDir}"
+println  "  projectDir:   ${project.projectDir}"
+
+
+def apiSrcPath = "${project.projectDir}/src/main/api".toString()
+def destPath = "${project.buildDir}/generated".toString()
+def apiDoc = 'crossword-gen-api.yaml'
+def inputFileUri = "$apiSrcPath/$apiDoc".toString()
+
+openApiValidate {
+    inputSpec = inputFileUri
+}
+
+// generate a jaxrs-cxf server stub by default
+openApiGenerate {
+    generatorName = "jaxrs-cxf"
+    inputSpec = inputFileUri
+    outputDir = "$destPath/server-jaxrs-cxf".toString()
+    apiPackage = "${project.group}.rest".toString()
+    invokerPackage = "${project.group}.invoker".toString()
+    modelPackage = "${project.group}.model".toString()
+    configOptions = [
+            dateLibrary: "java8"
+    ]
+}
+
+// call this task to generate jaxrs-cxf-cdi Server stub
+task buildJavaCDIServerStub(
+        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    generatorName = "jaxrs-cxf-cdi"
+    inputSpec = inputFileUri
+    outputDir = "$destPath/server-jaxrs-cxf-cdi".toString()
+    apiPackage = "${project.group}.rest".toString()
+    invokerPackage = "${project.group}.invoker".toString()
+    modelPackage = "${project.group}.model".toString()
+    configOptions = [
+            dateLibrary: "java8"
+    ]
+}
+
+// call this task to generate java client (for Android)
+task buildJavaClient(
+        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    generatorName = "java"
+    inputSpec = inputFileUri
+    outputDir = "$destPath/client-java".toString()
+    apiPackage = "${project.group}.rest".toString()
+    invokerPackage = "${project.group}.invoker".toString()
+    modelPackage = "${project.group}.model".toString()
+    configOptions = [
+            dateLibrary: "java8"
+    ]
+}
+
+// call this task to generate Angular client
+task buildAngularClient(
+        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
+    generatorName = "typescript-angular"
+    inputSpec = inputFileUri
+    outputDir = "$destPath/client-angular".toString()
+}
+
+// call this to generate all
+task codegen(dependsOn: ['openApiValidate', 
+                         'openApiGenerate', 
+                         'buildJavaCDIServerStub', 
+                         'buildJavaClient', 
+                         'buildAngularClient'])
+

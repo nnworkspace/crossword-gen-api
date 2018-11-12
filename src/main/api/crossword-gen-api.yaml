@@ -1,0 +1,121 @@
+openapi: "3.0.2"
+info:
+  version: 0.2.0
+  title: Word Search Puzzle Generator
+  description: An API for getting word search puzzles
+  termsOfService: http://asdf.org/terms/
+  contact:
+    name: Sang Wenjin
+    email: sangwenjin@gmail.com
+    url: https://github.com/nnworkspace/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://crossword-gen.some.server/api
+paths:
+  /wordpuzzle:
+    get:
+      description: |
+        Returns a word search puzzle and its corresponding solution.
+      operationId: wordpuzzle
+      parameters:
+      - name: rows
+        in: query
+        description: specifies number of rows in the puzzle board
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          default: 8
+      - name: cols
+        in: query
+        description: specifies number of columns in the puzzle board
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          default: 8
+      - name: density
+        in: query
+        description: |
+          specifies how full should the board be filled. A value between 0.1
+          to 1.0 is allowed. However, a high value close to 1.0 can be
+          difficult to fullfil. Values such as 0.75f or 0.875f are recommended.
+        required: false
+        schema:
+          type: number
+          format: float
+          minimum: 0.1f
+          maximum: 1.0f
+          default: 0.75f
+      - name: shortestWordLength
+        in: query
+        description: specifies the length of the shortest word allowed.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 3
+          default: 5
+      responses:
+        '200':
+          description: word puzzle generator response
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/PuzzleAndSolution'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Solution:
+      required:
+      - word
+      - startPosition
+      - orientation
+      properties:
+        word:
+          type: string
+          description: a word in the word search puzzle
+        startPosition:
+          type: array
+          description: First number in the array is the row index, second number is the column index.
+          items:
+            type: integer
+            format: int32
+        orientation:
+          type: string
+          description: Describes the orientation of the word placed. Either horizontal or vertical.
+          enum: ['horizontal', 'vertical']
+    PuzzleAndSolutions:
+      required:
+      - puzzle
+      - solutions
+      properties:
+        puzzle:
+          type: array
+          items:
+            type: string
+        solutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Solution'
+    Error:
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
