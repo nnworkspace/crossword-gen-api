@@ -68,7 +68,7 @@ paths:
               schema:
                 type: object
                 items:
-                  $ref: '#/components/schemas/PuzzleAndSolution'
+                  $ref: '#/components/schemas/PuzzleAndSolutions'
         default:
           description: unexpected error
           content:
