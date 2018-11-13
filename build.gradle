@@ -29,7 +29,7 @@ println  "  projectDir:   ${project.projectDir}"
 
 
 def apiSrcPath = "${project.projectDir}/src/main/api".toString()
-def destPath = "${project.buildDir}/generated".toString()
+def destPath = "${project.buildDir}".toString()
 def apiDoc = 'crossword-gen-api.yaml'
 def inputFileUri = "$apiSrcPath/$apiDoc".toString()
 
@@ -37,11 +37,11 @@ openApiValidate {
     inputSpec = inputFileUri
 }
 
-// generate a jaxrs-cxf server stub by default
+// generate a jaxrs-jersey server stub by default
 openApiGenerate {
-    generatorName = "jaxrs-cxf"
+    generatorName = "jaxrs-jersey"
     inputSpec = inputFileUri
-    outputDir = "$destPath/server-jaxrs-cxf".toString()
+    outputDir = "$destPath/server-jaxrs-jersey".toString()
     apiPackage = "${project.group}.rest".toString()
     invokerPackage = "${project.group}.invoker".toString()
     modelPackage = "${project.group}.model".toString()
@@ -89,7 +89,7 @@ task buildAngularClient(
 // call this to generate all
 task codegen(dependsOn: ['openApiValidate', 
                          'openApiGenerate', 
-                         'buildJavaCDIServerStub', 
-                         'buildJavaClient', 
+                         'buildJavaCDIServerStub',
+//                         'buildJavaClient',
                          'buildAngularClient'])
 
