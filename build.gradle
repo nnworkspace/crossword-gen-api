@@ -37,11 +37,11 @@ openApiValidate {
     inputSpec = inputFileUri
 }
 
-// generate a jaxrs-jersey server stub by default
+// generate a jaxrs-spec server stub by default
 openApiGenerate {
-    generatorName = "jaxrs-jersey"
+    generatorName = "jaxrs-spec"
     inputSpec = inputFileUri
-    outputDir = "$destPath/server-jaxrs-jersey".toString()
+    outputDir = "$destPath/server-jaxrs-spec".toString()
     apiPackage = "${project.group}.rest".toString()
     invokerPackage = "${project.group}.invoker".toString()
     modelPackage = "${project.group}.model".toString()
