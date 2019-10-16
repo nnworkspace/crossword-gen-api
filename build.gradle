@@ -39,6 +39,20 @@ openApiGenerate {
     ]
 }
 
+// call this task to generate jaxrs-cxf Server stub
+task buildJaxrsCxfServerStub(
+        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    generatorName = "jaxrs-cxf"
+    inputSpec = inputFileUri
+    outputDir = "$destPath/server-jaxrs-cxf".toString()
+    apiPackage = "${project.group}.rest".toString()
+    invokerPackage = "${project.group}.invoker".toString()
+    modelPackage = "${project.group}.model".toString()
+    configOptions = [
+            dateLibrary: "java8"
+    ]
+}
+
 // call this task to generate jaxrs-cxf-cdi Server stub
 task buildJaxrsCxfCDIServerStub(
         type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
@@ -93,6 +107,7 @@ task buildAngularClient(
 // call this to generate all
 task codegen(dependsOn: ['openApiValidate', 
                          'openApiGenerate', 
+                         'buildJaxrsCxfServerStub',
                          'buildJaxrsCxfCDIServerStub', 
                          'buildJaxrsCxfExtendedServerStub',
 //                         'buildJavaClient',
