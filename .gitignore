@@ -71,3 +71,5 @@ gradle-app.setting
 /gradlew
 /gradlew.bat
 /.idea/
+.settings/org.eclipse.buildship.core.prefs
+.project
