@@ -81,6 +81,17 @@ task buildJaxrsCxfExtendedServerStub(
     ]
 }
 
+// call this task to generate jaxrs-cxf-extended Server stub
+task buildSpringServerStub(
+        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    generatorName = "spring"
+    inputSpec = inputFileUri
+    outputDir = "$destPath/server-spring-boot".toString()
+    apiPackage = "${project.group}.rest".toString()
+    modelPackage = "${project.group}.model".toString()
+    configOptions = [ dateLibrary: "java8" ]
+}
+
 
 // call this task to generate java client (for Android)
 task buildJavaClient(
@@ -107,9 +118,10 @@ task buildAngularClient(
 // call this to generate all
 task codegen(dependsOn: ['openApiValidate', 
                          'openApiGenerate', 
-                         'buildJaxrsCxfServerStub',
-                         'buildJaxrsCxfCDIServerStub', 
-                         'buildJaxrsCxfExtendedServerStub',
+//                         'buildJaxrsCxfServerStub',
+//                         'buildJaxrsCxfCDIServerStub', 
+//                         'buildJaxrsCxfExtendedServerStub',
 //                         'buildJavaClient',
+                         'buildSpringServerStub',
                          'buildAngularClient'])
 
