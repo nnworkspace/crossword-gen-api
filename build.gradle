@@ -26,102 +26,102 @@ openApiValidate {
     inputSpec = inputFileUri
 }
 
-// generate a jaxrs-spec server stub by default
-openApiGenerate {
-    generatorName = "jaxrs-spec"
-    inputSpec = inputFileUri
-    outputDir = "$destPath/server-jaxrs-spec".toString()
-    apiPackage = "${project.group}.rest".toString()
-    invokerPackage = "${project.group}.invoker".toString()
-    modelPackage = "${project.group}.model".toString()
-    configOptions = [
-            dateLibrary: "java8"
-    ]
-}
+// // generate a jaxrs-spec server stub by default
+// openApiGenerate {
+//     generatorName = "jaxrs-spec"
+//     inputSpec = inputFileUri
+//     outputDir = "$destPath/server-jaxrs-spec".toString()
+//     apiPackage = "${project.group}.rest".toString()
+//     invokerPackage = "${project.group}.invoker".toString()
+//     modelPackage = "${project.group}.model".toString()
+//     configOptions = [
+//             dateLibrary: "java8"
+//     ]
+// }
 
-// call this task to generate jaxrs-cxf Server stub
-task buildJaxrsCxfServerStub(
-        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
-    generatorName = "jaxrs-cxf"
-    inputSpec = inputFileUri
-    outputDir = "$destPath/server-jaxrs-cxf".toString()
-    apiPackage = "${project.group}.rest".toString()
-    invokerPackage = "${project.group}.invoker".toString()
-    modelPackage = "${project.group}.model".toString()
-    configOptions = [
-            dateLibrary: "java8"
-    ]
-}
+// // call this task to generate jaxrs-cxf Server stub
+// task buildJaxrsCxfServerStub(
+//         type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+//     generatorName = "jaxrs-cxf"
+//     inputSpec = inputFileUri
+//     outputDir = "$destPath/server-jaxrs-cxf".toString()
+//     apiPackage = "${project.group}.rest".toString()
+//     invokerPackage = "${project.group}.invoker".toString()
+//     modelPackage = "${project.group}.model".toString()
+//     configOptions = [
+//             dateLibrary: "java8"
+//     ]
+// }
 
-// call this task to generate jaxrs-cxf-cdi Server stub
-task buildJaxrsCxfCDIServerStub(
-        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
-    generatorName = "jaxrs-cxf-cdi"
-    inputSpec = inputFileUri
-    outputDir = "$destPath/server-jaxrs-cxf-cdi".toString()
-    apiPackage = "${project.group}.rest".toString()
-    invokerPackage = "${project.group}.invoker".toString()
-    modelPackage = "${project.group}.model".toString()
-    configOptions = [
-            dateLibrary: "java8"
-    ]
-}
+// // call this task to generate jaxrs-cxf-cdi Server stub
+// task buildJaxrsCxfCDIServerStub(
+//         type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+//     generatorName = "jaxrs-cxf-cdi"
+//     inputSpec = inputFileUri
+//     outputDir = "$destPath/server-jaxrs-cxf-cdi".toString()
+//     apiPackage = "${project.group}.rest".toString()
+//     invokerPackage = "${project.group}.invoker".toString()
+//     modelPackage = "${project.group}.model".toString()
+//     configOptions = [
+//             dateLibrary: "java8"
+//     ]
+// }
 
-// call this task to generate jaxrs-cxf-extended Server stub
-task buildJaxrsCxfExtendedServerStub(
-        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
-    generatorName = "jaxrs-cxf-extended"
-    inputSpec = inputFileUri
-    outputDir = "$destPath/server-jaxrs-cxf-extended".toString()
-    apiPackage = "${project.group}.rest".toString()
-    invokerPackage = "${project.group}.invoker".toString()
-    modelPackage = "${project.group}.model".toString()
-    configOptions = [
-            dateLibrary: "java8"
-    ]
-}
+// // call this task to generate jaxrs-cxf-extended Server stub
+// task buildJaxrsCxfExtendedServerStub(
+//         type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+//     generatorName = "jaxrs-cxf-extended"
+//     inputSpec = inputFileUri
+//     outputDir = "$destPath/server-jaxrs-cxf-extended".toString()
+//     apiPackage = "${project.group}.rest".toString()
+//     invokerPackage = "${project.group}.invoker".toString()
+//     modelPackage = "${project.group}.model".toString()
+//     configOptions = [
+//             dateLibrary: "java8"
+//     ]
+// }
 
-// call this task to generate jaxrs-cxf-extended Server stub
-task buildSpringServerStub(
-        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
-    generatorName = "spring"
-    inputSpec = inputFileUri
-    outputDir = "$destPath/server-spring-boot".toString()
-    apiPackage = "${project.group}.rest".toString()
-    modelPackage = "${project.group}.model".toString()
-    configOptions = [ dateLibrary: "java8" ]
-}
+// // call this task to generate jaxrs-cxf-extended Server stub
+// task buildSpringServerStub(
+//         type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+//     generatorName = "spring"
+//     inputSpec = inputFileUri
+//     outputDir = "$destPath/server-spring-boot".toString()
+//     apiPackage = "${project.group}.rest".toString()
+//     modelPackage = "${project.group}.model".toString()
+//     configOptions = [ dateLibrary: "java8" ]
+// }
 
 
-// call this task to generate java client (for Android)
-task buildJavaClient(
-        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
-    generatorName = "java"
-    inputSpec = inputFileUri
-    outputDir = "$destPath/client-java".toString()
-    apiPackage = "${project.group}.rest".toString()
-    invokerPackage = "${project.group}.invoker".toString()
-    modelPackage = "${project.group}.model".toString()
-    configOptions = [
-            dateLibrary: "java8"
-    ]
-}
+// // call this task to generate java client (for Android)
+// task buildJavaClient(
+//         type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+//     generatorName = "java"
+//     inputSpec = inputFileUri
+//     outputDir = "$destPath/client-java".toString()
+//     apiPackage = "${project.group}.rest".toString()
+//     invokerPackage = "${project.group}.invoker".toString()
+//     modelPackage = "${project.group}.model".toString()
+//     configOptions = [
+//             dateLibrary: "java8"
+//     ]
+// }
 
-// call this task to generate Angular client
-task buildAngularClient(
-        type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
-    generatorName = "typescript-angular"
-    inputSpec = inputFileUri
-    outputDir = "$destPath/client-angular".toString()
-}
+// // call this task to generate Angular client
+// task buildAngularClient(
+//         type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
+//     generatorName = "typescript-angular"
+//     inputSpec = inputFileUri
+//     outputDir = "$destPath/client-angular".toString()
+// }
 
-// call this to generate all
-task codegen(dependsOn: ['openApiValidate', 
-                         'openApiGenerate', 
-//                         'buildJaxrsCxfServerStub',
-//                         'buildJaxrsCxfCDIServerStub', 
-//                         'buildJaxrsCxfExtendedServerStub',
-//                         'buildJavaClient',
-                         'buildSpringServerStub',
-                         'buildAngularClient'])
+// // call this to generate all
+// task codegen(dependsOn: ['openApiValidate', 
+//                          'openApiGenerate', 
+// //                         'buildJaxrsCxfServerStub',
+// //                         'buildJaxrsCxfCDIServerStub', 
+// //                         'buildJaxrsCxfExtendedServerStub',
+// //                         'buildJavaClient',
+//                          'buildSpringServerStub',
+//                          'buildAngularClient'])
 
